@@ -19,7 +19,7 @@ export default function Module1Screen() {
   ]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={['left', 'right']} style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Smart Field Survey</Text>
         <Text style={styles.headerStatus}>GPS: Active</Text>
@@ -33,7 +33,7 @@ export default function Module1Screen() {
           <Text style={styles.text}>Session: {studentDetails.session}</Text>
         </View>
 
-        <Text style={styles.sectionHeader}>Today's Survey Count</Text>
+        <Text style={styles.sectionHeader}>{"Today's Survey Count"}</Text>
         <View style={styles.statsRow}>
           <View style={styles.statBox}>
             <Text style={styles.statNumber}>{surveyStats.total}</Text>
