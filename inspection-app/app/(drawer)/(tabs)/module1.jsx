@@ -1,184 +1,429 @@
-import React, { useState } from 'react';
-import {View,Text,StyleSheet,ScrollView,TouchableOpacity,Alert} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Module1Screen() {
-  const studentDetails = {
-    name: 'Saptak Bhattacharyya',
-    studentId: '002',
-    department: 'Field Inspection',
-    session: '2025-2026',
-  };
-
-  const [surveyStats] = useState({total: 12,completed: 8,pending: 3,flagged: 1,});
-
-  const [recentSurveys] = useState([
-    { id: 'SRV-1042', siteName: 'Sector 5 Complex', location: 'Kolkata', status: 'Completed' },
-    { id: 'SRV-1043', siteName: 'Lake View Block B', location: 'Salt Lake', status: 'In Progress' },
-    { id: 'SRV-1044', siteName: 'Highway 12 Overpass', location: 'Rajarhat', status: 'Flagged' },
-  ]);
-
   return (
-    <SafeAreaView edges={['left', 'right']} style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Smart Field Survey</Text>
-        <Text style={styles.headerStatus}>GPS: Active</Text>
+    <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+      
+      {/* Welcome Card */}
+      <View style={styles.welcomeCard}>
+        <View style={styles.welcomeLeft}>
+          <Text style={styles.welcomeText}>Welcome back,</Text>
+          <Text style={styles.userName}>Saptak Bhattacharyya 👋</Text>
+          <View style={styles.badgesRow}>
+            <View style={styles.badge}>
+              <Ionicons name="person-outline" size={12} color="#4f46e5" />
+              <Text style={styles.badgeText}>ID: 002</Text>
+            </View>
+            <View style={styles.badge}>
+              <Ionicons name="business-outline" size={12} color="#4f46e5" />
+              <Text style={styles.badgeText}>Department: Field Inspection</Text>
+            </View>
+          </View>
+          <View style={styles.badge}>
+            <Ionicons name="time-outline" size={12} color="#4f46e5" />
+            <Text style={styles.badgeText}>Session: 2025-2026</Text>
+          </View>
+        </View>
+        <View style={styles.avatarContainer}>
+          <Image 
+            source={require('@/assets/images/avatar.png')} 
+            style={styles.avatar3D} 
+            resizeMode="contain"
+          />
+        </View>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Welcome, {studentDetails.name}</Text>
-          <Text style={styles.text}>Student ID: {studentDetails.studentId}</Text>
-          <Text style={styles.text}>Department: {studentDetails.department}</Text>
-          <Text style={styles.text}>Session: {studentDetails.session}</Text>
+      {/* GPS Status Card */}
+      <View style={styles.gpsCard}>
+        <View style={styles.gpsIconCircle}>
+          <Ionicons name="location-outline" size={20} color="#22c55e" />
         </View>
+        <View style={styles.gpsTextContainer}>
+          <Text style={styles.gpsTitle}>
+            GPS Status: <Text style={styles.gpsActiveText}>Active</Text>
+          </Text>
+          <Text style={styles.gpsSubtitle}>Last synced: 3 mins ago</Text>
+        </View>
+        <Ionicons name="cellular-outline" size={24} color="#22c55e" />
+      </View>
 
-        <Text style={styles.sectionHeader}>{"Today's Survey Count"}</Text>
-        <View style={styles.statsRow}>
-          <View style={styles.statBox}>
-            <Text style={styles.statNumber}>{surveyStats.total}</Text>
-            <Text style={styles.statLabel}>Total</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Text style={styles.statNumber}>{surveyStats.completed}</Text>
-            <Text style={styles.statLabel}>Completed</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Text style={styles.statNumber}>{surveyStats.pending}</Text>
-            <Text style={styles.statLabel}>Pending</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Text style={styles.statNumber}>{surveyStats.flagged}</Text>
-            <Text style={styles.statLabel}>Flagged</Text>
+      {/* Today's Survey Count */}
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>Today&apos;s Survey Count</Text>
+        <TouchableOpacity>
+          <Text style={styles.viewAllText}>View all</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.countRow}>
+        <View style={styles.countCard}>
+          <Text style={styles.countNumber}>12</Text>
+          <Text style={styles.countLabel}>Total</Text>
+          <View style={[styles.countIconCircle, { backgroundColor: '#eff6ff' }]}>
+            <Ionicons name="document-text-outline" size={20} color="#3b82f6" />
           </View>
         </View>
-
-        <Text style={styles.sectionHeader}>Quick Actions</Text>
-        <View style={styles.actionsRow}>
-          <TouchableOpacity style={styles.actionBtn} onPress={() => Alert.alert('Action', 'New Survey')}>
-            <Text style={styles.actionBtnText}>+ New Survey</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionBtn} onPress={() => Alert.alert('Action', 'View Location')}>
-            <Text style={styles.actionBtnText}>Location</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionBtn} onPress={() => Alert.alert('Action', 'Contacts')}>
-            <Text style={styles.actionBtnText}>Contacts</Text>
-          </TouchableOpacity>
-        </View>
-
-        <Text style={styles.sectionHeader}>Recent Survey Summary</Text>
-        {recentSurveys.map((item) => (
-          <View key={item.id} style={styles.surveyItem}>
-            <Text style={styles.surveyTitle}>{item.id} - {item.siteName}</Text>
-            <Text style={styles.text}>Location: {item.location}</Text>
-            <Text style={styles.text}>Status: {item.status}</Text>
+        <View style={styles.countCard}>
+          <Text style={styles.countNumber}>8</Text>
+          <Text style={styles.countLabel}>Completed</Text>
+          <View style={[styles.countIconCircle, { backgroundColor: '#f0fdf4' }]}>
+            <Ionicons name="checkmark-circle" size={20} color="#22c55e" />
           </View>
-        ))}
-      </ScrollView>
-    </SafeAreaView>
+        </View>
+        <View style={styles.countCard}>
+          <Text style={styles.countNumber}>3</Text>
+          <Text style={styles.countLabel}>Pending</Text>
+          <View style={[styles.countIconCircle, { backgroundColor: '#fff7ed' }]}>
+            <Ionicons name="time" size={20} color="#f97316" />
+          </View>
+        </View>
+        <View style={styles.countCard}>
+          <Text style={styles.countNumber}>1</Text>
+          <Text style={styles.countLabel}>Flagged</Text>
+          <View style={[styles.countIconCircle, { backgroundColor: '#fef2f2' }]}>
+            <Ionicons name="flag" size={20} color="#ef4444" />
+          </View>
+        </View>
+      </View>
+
+      {/* Quick Actions */}
+      <Text style={styles.sectionTitle}>Quick Actions</Text>
+      <View style={styles.quickActionsRow}>
+        <TouchableOpacity style={styles.quickActionWrapper}>
+          <LinearGradient colors={['#3b82f6', '#2563eb']} style={styles.quickActionCard}>
+            <Ionicons name="add" size={24} color="#fff" />
+            <View style={styles.quickActionTextContainer}>
+              <Text style={styles.quickActionTitle}>New Survey</Text>
+              <Text style={styles.quickActionSubtitle}>Start new survey</Text>
+            </View>
+          </LinearGradient>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.quickActionWrapper}>
+          <LinearGradient colors={['#8b5cf6', '#6d28d9']} style={styles.quickActionCard}>
+            <Ionicons name="location-outline" size={24} color="#fff" />
+            <View style={styles.quickActionTextContainer}>
+              <Text style={styles.quickActionTitle}>Location</Text>
+              <Text style={styles.quickActionSubtitle}>Mark location</Text>
+            </View>
+          </LinearGradient>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.quickActionWrapper}>
+          <LinearGradient colors={['#14b8a6', '#0f766e']} style={styles.quickActionCard}>
+            <Ionicons name="people-outline" size={24} color="#fff" />
+            <View style={styles.quickActionTextContainer}>
+              <Text style={styles.quickActionTitle}>Contacts</Text>
+              <Text style={styles.quickActionSubtitle}>View contacts</Text>
+            </View>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
+
+      {/* Recent Survey Summary */}
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>Recent Survey Summary</Text>
+        <TouchableOpacity>
+          <Text style={styles.viewAllText}>View all</Text>
+        </TouchableOpacity>
+      </View>
+      
+      <View style={styles.recentList}>
+        {/* Survey 1 */}
+        <TouchableOpacity style={styles.recentItem}>
+          <Image source={require('@/assets/images/survey1.png')} style={styles.recentImage} />
+          <View style={styles.recentInfo}>
+            <Text style={styles.recentTitle}>SRV-1042 - Sector 5 Complex</Text>
+            <View style={styles.recentLocationRow}>
+              <Ionicons name="location-outline" size={14} color="#64748b" />
+              <Text style={styles.recentLocationText}>Kolkata</Text>
+            </View>
+            <View style={styles.recentStatusRow}>
+              <Ionicons name="checkmark-circle-outline" size={14} color="#22c55e" />
+              <Text style={styles.statusTextCompleted}>Completed</Text>
+            </View>
+          </View>
+          <View style={styles.recentRight}>
+            <Ionicons name="chevron-forward" size={16} color="#94a3b8" style={{ alignSelf: 'flex-end', marginBottom: 20 }} />
+            <Text style={styles.timeText}>2h ago</Text>
+          </View>
+        </TouchableOpacity>
+
+        {/* Survey 2 */}
+        <TouchableOpacity style={styles.recentItem}>
+          <Image source={require('@/assets/images/survey2.png')} style={styles.recentImage} />
+          <View style={styles.recentInfo}>
+            <Text style={styles.recentTitle}>SRV-1043 - Lake View Block B</Text>
+            <View style={styles.recentLocationRow}>
+              <Ionicons name="location-outline" size={14} color="#64748b" />
+              <Text style={styles.recentLocationText}>Salt Lake</Text>
+            </View>
+            <View style={styles.recentStatusRow}>
+              <Ionicons name="time-outline" size={14} color="#3b82f6" />
+              <Text style={styles.statusTextInProgress}>In Progress</Text>
+            </View>
+          </View>
+          <View style={styles.recentRight}>
+            <Ionicons name="chevron-forward" size={16} color="#94a3b8" style={{ alignSelf: 'flex-end', marginBottom: 20 }} />
+            <Text style={styles.timeText}>4h ago</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  header: {
-    padding: 16,
-    backgroundColor: '#f4f4f4',
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  headerStatus: {
-    fontSize: 13,
-    color: 'green',
-    fontWeight: '600',
+    backgroundColor: '#f8fafc',
   },
   scrollContent: {
     padding: 16,
+    paddingBottom: 40,
   },
-  card: {
-    padding: 14,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 6,
-    marginBottom: 16,
-  },
-  cardTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  sectionHeader: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 8,
-    marginBottom: 10,
-  },
-  text: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 4,
-  },
-  statsRow: {
+  welcomeCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 16,
-  },
-  statBox: {
-    flex: 1,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 6,
     alignItems: 'center',
-    marginHorizontal: 3,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   },
-  statNumber: {
+  welcomeLeft: {
+    flex: 1,
+  },
+  welcomeText: {
+    color: '#64748b',
+    fontSize: 14,
+  },
+  userName: {
+    color: '#0f172a',
     fontSize: 18,
     fontWeight: 'bold',
+    marginTop: 4,
+    marginBottom: 12,
   },
-  statLabel: {
-    fontSize: 11,
-    color: '#666',
+  badgesRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 8,
+    gap: 8,
+  },
+  badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#e0e7ff',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  badgeText: {
+    color: '#4338ca',
+    fontSize: 10,
+    marginLeft: 4,
+    fontWeight: '600',
+  },
+  avatarContainer: {
+    width: 80,
+    height: 100,
+    justifyContent: 'flex-end',
+  },
+  avatar3D: {
+    width: '100%',
+    height: '100%',
+  },
+  gpsCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  gpsIconCircle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#f0fdf4',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+  gpsTextContainer: {
+    flex: 1,
+  },
+  gpsTitle: {
+    color: '#0f172a',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  gpsActiveText: {
+    color: '#22c55e',
+  },
+  gpsSubtitle: {
+    color: '#64748b',
+    fontSize: 12,
     marginTop: 2,
   },
-  actionsRow: {
+  sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 16,
-  },
-  actionBtn: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: '#007bff',
-    borderRadius: 6,
     alignItems: 'center',
-    marginHorizontal: 3,
+    marginBottom: 12,
   },
-  actionBtnText: {
+  sectionTitle: {
+    color: '#0f172a',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 12,
+  },
+  viewAllText: {
+    color: '#3b82f6',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  countRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 24,
+  },
+  countCard: {
+    backgroundColor: '#fff',
+    width: '23%',
+    borderRadius: 16,
+    paddingVertical: 16,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  countNumber: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0f172a',
+  },
+  countLabel: {
+    fontSize: 11,
+    color: '#64748b',
+    marginTop: 4,
+    marginBottom: 12,
+  },
+  countIconCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  quickActionsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 24,
+  },
+  quickActionWrapper: {
+    width: '31%',
+  },
+  quickActionCard: {
+    borderRadius: 16,
+    padding: 12,
+    height: 100,
+    justifyContent: 'space-between',
+  },
+  quickActionTextContainer: {
+    marginTop: 8,
+  },
+  quickActionTitle: {
     color: '#fff',
     fontSize: 13,
     fontWeight: 'bold',
   },
-  surveyItem: {
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 6,
-    marginBottom: 8,
+  quickActionSubtitle: {
+    color: 'rgba(255,255,255,0.8)',
+    fontSize: 10,
+    marginTop: 2,
   },
-  surveyTitle: {
+  recentList: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  recentItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f1f5f9',
+  },
+  recentImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+    marginRight: 12,
+  },
+  recentInfo: {
+    flex: 1,
+  },
+  recentTitle: {
+    color: '#0f172a',
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 4,
+  },
+  recentLocationRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  recentLocationText: {
+    color: '#64748b',
+    fontSize: 12,
+    marginLeft: 4,
+  },
+  recentStatusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  statusTextCompleted: {
+    color: '#22c55e',
+    fontSize: 12,
+    marginLeft: 4,
+    fontWeight: '500',
+  },
+  statusTextInProgress: {
+    color: '#3b82f6',
+    fontSize: 12,
+    marginLeft: 4,
+    fontWeight: '500',
+  },
+  recentRight: {
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    height: 60,
+  },
+  timeText: {
+    color: '#94a3b8',
+    fontSize: 11,
   },
 });

@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { HapticTab } from '@/components/haptic-tab';
 import { SurveyProvider } from '@/constants/SurveyContext';
 
@@ -15,23 +16,33 @@ export default function TabLayout() {
     <SurveyProvider>
       <View style={styles.container}>
         <SafeAreaView edges={['top', 'left', 'right']} style={styles.headerSafeArea}>
-          <View style={styles.headerBar}>
-            <TouchableOpacity
-              style={styles.drawerToggleBtn}
-              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-            >
-              <Ionicons name="menu" size={24} color="#38bdf8" />
-            </TouchableOpacity>
+          <LinearGradient
+            colors={['#3b82f6', '#8b5cf6']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.headerGradient}
+          >
+            <View style={styles.headerContent}>
+              <TouchableOpacity
+                style={styles.drawerToggleBtn}
+                onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+              >
+                <Ionicons name="menu" size={24} color="#fff" />
+              </TouchableOpacity>
+              
+              <View style={styles.titleContainer}>
+                <Text style={styles.appTitle}>Smart Field Survey</Text>
+                <Text style={styles.appSubtitle}>Inspection & Audit Suite</Text>
+              </View>
 
-            <View style={styles.titleContainer}>
-              <Text style={styles.appTitle}>Smart Field Survey</Text>
-              <Text style={styles.appSubtitle}>Inspection & Audit Suite</Text>
+              <TouchableOpacity style={styles.bellIcon}>
+                <Ionicons name="notifications-outline" size={22} color="#fff" />
+              </TouchableOpacity>
             </View>
-
-            <View style={styles.badgeContainer}>
-              <Text style={styles.badgeText}>Mod 1-8</Text>
+            <View style={styles.modBadgeContainer}>
+              <Text style={styles.modBadgeText}>Mod 1-8</Text>
             </View>
-          </View>
+          </LinearGradient>
         </SafeAreaView>
 
         <Tabs
@@ -134,51 +145,60 @@ const styles = StyleSheet.create({
     backgroundColor: '#0f172a',
   },
   headerSafeArea: {
-    backgroundColor: '#1e293b',
+    backgroundColor: '#3b82f6',
   },
-  headerBar: {
-    height: 56,
-    backgroundColor: '#1e293b',
+  headerGradient: {
+    paddingTop: 10,
+    paddingBottom: 24,
+    paddingHorizontal: 16,
+    position: 'relative',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  headerContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#334155',
+    justifyContent: 'space-between',
   },
   drawerToggleBtn: {
-    width: 38,
-    height: 38,
-    borderRadius: 8,
-    backgroundColor: '#0f172a',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 12,
-  },
-  drawerIcon: {
-    fontSize: 22,
-    color: '#38bdf8',
+    padding: 4,
   },
   titleContainer: {
     flex: 1,
+    alignItems: 'center',
   },
   appTitle: {
-    color: '#f8fafc',
-    fontSize: 16,
+    color: '#fff',
+    fontSize: 18,
     fontWeight: 'bold',
   },
   appSubtitle: {
-    color: '#94a3b8',
-    fontSize: 11,
+    color: '#e2e8f0',
+    fontSize: 12,
+    marginTop: 2,
   },
-  badgeContainer: {
-    backgroundColor: '#0284c7',
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 12,
+  bellIcon: {
+    padding: 6,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderRadius: 20,
   },
-  badgeText: {
-    color: '#ffffff',
-    fontSize: 11,
+  modBadgeContainer: {
+    position: 'absolute',
+    bottom: -12,
+    right: 20,
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingVertical: 4,
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  modBadgeText: {
+    color: '#3b82f6',
     fontWeight: 'bold',
+    fontSize: 12,
   },
 });
