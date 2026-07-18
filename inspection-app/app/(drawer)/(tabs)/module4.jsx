@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 import {
   View,
   Text,
@@ -15,6 +16,8 @@ import * as Clipboard from 'expo-clipboard';
 import { useSurvey } from '@/constants/SurveyContext';
 
 export default function Module4Screen() {
+  const { isDark } = useTheme();
+  const styles = getStyles(isDark);
   const { draftSurvey, setDraftLocation } = useSurvey();
 
   const [hasPermission, setHasPermission] = useState(null);
@@ -240,16 +243,16 @@ export default function Module4Screen() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = (isDark) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f172a',
+    backgroundColor: isDark ? '#0f172a' : '#f8fafc',
   },
   header: {
     padding: 20,
-    backgroundColor: '#1e293b',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
     borderBottomWidth: 1,
-    borderBottomColor: '#334155',
+    borderBottomColor: isDark ? '#334155' : '#ccc',
   },
   headerTitle: {
     fontSize: 22,
@@ -258,24 +261,24 @@ const styles = StyleSheet.create({
   },
   headerSubtitle: {
     fontSize: 13,
-    color: '#94a3b8',
+    color: isDark ? '#94a3b8' : '#64748b',
     marginTop: 2,
   },
   scrollContent: {
     padding: 16,
   },
   card: {
-    backgroundColor: '#1e293b',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: isDark ? '#334155' : '#ccc',
   },
   cardTitle: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#f8fafc',
+    color: isDark ? '#f8fafc' : '#0f172a',
     marginBottom: 12,
   },
   permissionRow: {
@@ -284,7 +287,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   statusLabel: {
-    color: '#cbd5e1',
+    color: isDark ? '#cbd5e1' : '#555',
     fontSize: 15,
     marginRight: 10,
   },
@@ -303,7 +306,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#d97706',
   },
   badgeText: {
-    color: '#ffffff',
+    color: isDark ? '#ffffff' : '#0f172a',
     fontSize: 13,
     fontWeight: 'bold',
   },
@@ -319,12 +322,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: {
-    color: '#94a3b8',
+    color: isDark ? '#94a3b8' : '#64748b',
     marginTop: 10,
     fontSize: 14,
   },
   detailsBox: {
-    backgroundColor: '#0f172a',
+    backgroundColor: isDark ? '#0f172a' : '#f8fafc',
     borderRadius: 8,
     padding: 14,
     marginBottom: 14,
@@ -334,10 +337,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 6,
     borderBottomWidth: 1,
-    borderBottomColor: '#1e293b',
+    borderBottomColor: isDark ? '#1e293b' : '#ddd',
   },
   detailLabel: {
-    color: '#94a3b8',
+    color: isDark ? '#94a3b8' : '#64748b',
     fontSize: 14,
     fontWeight: '500',
   },
@@ -353,7 +356,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   addressValue: {
-    color: '#cbd5e1',
+    color: isDark ? '#cbd5e1' : '#555',
     fontSize: 13,
     flex: 1,
     textAlign: 'right',
@@ -366,7 +369,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   noDataText: {
-    color: '#94a3b8',
+    color: isDark ? '#94a3b8' : '#64748b',
     textAlign: 'center',
     marginVertical: 16,
     fontStyle: 'italic',
@@ -388,7 +391,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0d9488',
   },
   btnText: {
-    color: '#ffffff',
+    color: isDark ? '#ffffff' : '#0f172a',
     fontWeight: 'bold',
     fontSize: 14,
   },
@@ -406,7 +409,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   infoText: {
-    color: '#cbd5e1',
+    color: isDark ? '#cbd5e1' : '#555',
     fontSize: 13,
   },
   infoSubText: {
