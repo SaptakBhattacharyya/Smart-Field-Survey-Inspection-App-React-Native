@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 import {View,Text,TextInput,StyleSheet,ScrollView,TouchableOpacity,Alert} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useSurvey } from '@/constants/SurveyContext';
 
 export default function Module2Screen() {
+  const { isDark } = useTheme();
+  const styles = getStyles(isDark);
   const { setDraftSurvey } = useSurvey();
   const studentDetails = {
     name: 'Saptak Bhattacharyya',
@@ -282,16 +285,16 @@ export default function Module2Screen() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = (isDark) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
   },
   header: {
     padding: 16,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: isDark ? '#0f172a' : '#f4f4f4',
     borderBottomWidth: 1,
-    borderColor: '#ddd',
+    borderColor: isDark ? '#334155' : '#ddd',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -311,7 +314,7 @@ const styles = StyleSheet.create({
   card: {
     padding: 14,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: isDark ? '#334155' : '#ccc',
     borderRadius: 6,
     marginBottom: 16,
   },
@@ -328,21 +331,21 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    color: '#333',
+    color: isDark ? '#cbd5e1' : '#333',
     marginBottom: 4,
   },
   descText: {
     fontSize: 13,
-    color: '#555',
+    color: isDark ? '#94a3b8' : '#555',
     marginTop: 2,
     fontStyle: 'italic',
   },
   formCard: {
     padding: 16,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: isDark ? '#334155' : '#ccc',
     borderRadius: 8,
-    backgroundColor: '#fafafa',
+    backgroundColor: isDark ? '#1e293b' : '#fafafa',
     marginBottom: 20,
   },
   inputGroup: {
@@ -351,7 +354,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#333',
+    color: isDark ? '#cbd5e1' : '#333',
     marginBottom: 6,
   },
   requiredStar: {
@@ -359,13 +362,13 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: isDark ? '#334155' : '#ccc',
     borderRadius: 6,
     paddingHorizontal: 12,
     paddingVertical: 10,
     fontSize: 14,
-    backgroundColor: '#fff',
-    color: '#333',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
+    color: isDark ? '#cbd5e1' : '#333',
   },
   textArea: {
     minHeight: 80,
@@ -388,11 +391,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 4,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: isDark ? '#334155' : '#ccc',
     borderRadius: 6,
     alignItems: 'center',
     marginHorizontal: 2,
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
   },
   priorityChipSelected: {
     backgroundColor: '#007bff',
@@ -400,7 +403,7 @@ const styles = StyleSheet.create({
   },
   priorityChipText: {
     fontSize: 13,
-    color: '#333',
+    color: isDark ? '#cbd5e1' : '#333',
     fontWeight: '500',
   },
   priorityChipTextSelected: {
@@ -450,10 +453,10 @@ const styles = StyleSheet.create({
   surveyItem: {
     padding: 12,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: isDark ? '#334155' : '#ddd',
     borderRadius: 6,
     marginBottom: 10,
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
   },
   surveyHeader: {
     flexDirection: 'row',
