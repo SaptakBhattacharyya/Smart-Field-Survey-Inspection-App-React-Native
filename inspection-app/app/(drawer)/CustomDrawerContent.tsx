@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Switch, Image } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useRouter, usePathname } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function CustomDrawerContent(props: any) {
   const router = useRouter();
   const pathname = usePathname();
-  const [isDarkMode, setIsDarkMode] = useState(true); // Default as per image
+  const { isDark: isDarkMode, toggleColorScheme } = useTheme();
 
   const isActive = (route: string) => {
     return pathname.includes(route);
@@ -125,7 +126,7 @@ export default function CustomDrawerContent(props: any) {
           </View>
           <Switch
             value={isDarkMode}
-            onValueChange={setIsDarkMode}
+            onValueChange={toggleColorScheme}
             trackColor={{ false: '#334155', true: '#3b82f6' }}
             thumbColor={'#ffffff'}
           />
