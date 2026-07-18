@@ -55,7 +55,7 @@ export default function CustomDrawer({ visible, onClose }) {
                 style={styles.menuItem}
                 onPress={() => navigateTo(item.route)}
               >
-                <Ionicons name={item.icon as any} size={20} color="#38bdf8" style={{ marginRight: 12 }} />
+                <Ionicons name={item.icon} size={20} color="#38bdf8" style={{ marginRight: 12 }} />
                 <View style={styles.menuTextCol}>
                   <Text style={styles.menuTitle}>{item.title}</Text>
                   <Text style={styles.menuDesc}>{item.desc}</Text>
