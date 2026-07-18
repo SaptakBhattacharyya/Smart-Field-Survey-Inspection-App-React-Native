@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 import { View,Text,StyleSheet,ScrollView,TouchableOpacity,Alert,Image,ActivityIndicator,Modal} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CameraView, Camera } from 'expo-camera';
@@ -7,6 +8,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useSurvey } from '@/constants/SurveyContext';
 
 export default function Module3Screen() {
+  const { isDark } = useTheme();
+  const styles = getStyles(isDark);
   const { setDraftPhoto } = useSurvey();
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [hasMediaPermission, setHasMediaPermission] = useState(null);
@@ -386,16 +389,16 @@ export default function Module3Screen() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = (isDark) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
   },
   header: {
     padding: 16,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: isDark ? '#0f172a' : '#f4f4f4',
     borderBottomWidth: 1,
-    borderColor: '#ddd',
+    borderColor: isDark ? '#334155' : '#ddd',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -419,16 +422,16 @@ const styles = StyleSheet.create({
   card: {
     padding: 14,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: isDark ? '#334155' : '#ccc',
     borderRadius: 6,
     marginBottom: 16,
-    backgroundColor: '#fafafa',
+    backgroundColor: isDark ? '#1e293b' : '#fafafa',
   },
   cardTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 8,
-    color: '#111',
+    color: isDark ? '#e2e8f0' : '#111',
   },
   sectionHeader: {
     fontSize: 15,
@@ -449,7 +452,7 @@ const styles = StyleSheet.create({
   },
   permissionLabel: {
     fontSize: 14,
-    color: '#333',
+    color: isDark ? '#cbd5e1' : '#333',
     fontWeight: '500',
   },
   statusText: {
@@ -511,20 +514,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   timestampContainer: {
-    backgroundColor: '#eee',
+    backgroundColor: isDark ? '#334155' : '#eee',
     padding: 10,
     borderRadius: 6,
     marginBottom: 14,
   },
   timestampLabel: {
     fontSize: 12,
-    color: '#666',
+    color: isDark ? '#94a3b8' : '#666',
     fontWeight: '600',
   },
   timestampValue: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#111',
+    color: isDark ? '#e2e8f0' : '#111',
     marginTop: 2,
   },
   actionsRow: {
@@ -573,7 +576,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     fontSize: 15,
     fontWeight: '600',
-    color: '#333',
+    color: isDark ? '#cbd5e1' : '#333',
   },
   cameraModalContainer: {
     flex: 1,
@@ -618,7 +621,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
   },
   permissionFallback: {
     flex: 1,
@@ -634,7 +637,7 @@ const styles = StyleSheet.create({
   },
   fallbackText: {
     fontSize: 14,
-    color: '#ccc',
+    color: isDark ? '#334155' : '#ccc',
     textAlign: 'center',
     marginBottom: 20,
   },
