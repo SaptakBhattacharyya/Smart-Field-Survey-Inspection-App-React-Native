@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTheme } from '@/context/ThemeContext';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { DrawerToggleButton } from '@react-navigation/drawer';
 
 export default function DashboardScreen() {
+  const { isDark } = useTheme();
+  const styles = getStyles(isDark);
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Custom Header */}
@@ -201,10 +204,10 @@ export default function DashboardScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = (isDark) => StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: isDark ? '#0f172a' : '#f8fafc',
   },
   headerGradient: {
     paddingTop: 40,
@@ -241,7 +244,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -12,
     right: 20,
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
     paddingHorizontal: 16,
     paddingVertical: 4,
     borderRadius: 16,
@@ -265,7 +268,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   welcomeCard: {
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
     borderRadius: 16,
     padding: 16,
     flexDirection: 'row',
@@ -282,11 +285,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   welcomeText: {
-    color: '#64748b',
+    color: isDark ? '#94a3b8' : '#64748b',
     fontSize: 14,
   },
   userName: {
-    color: '#0f172a',
+    color: isDark ? '#f8fafc' : '#0f172a',
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 4,
@@ -324,7 +327,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   gpsCard: {
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
     borderRadius: 16,
     padding: 16,
     flexDirection: 'row',
@@ -349,7 +352,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   gpsTitle: {
-    color: '#0f172a',
+    color: isDark ? '#f8fafc' : '#0f172a',
     fontSize: 14,
     fontWeight: '600',
   },
@@ -357,7 +360,7 @@ const styles = StyleSheet.create({
     color: '#22c55e',
   },
   gpsSubtitle: {
-    color: '#64748b',
+    color: isDark ? '#94a3b8' : '#64748b',
     fontSize: 12,
     marginTop: 2,
   },
@@ -368,7 +371,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   sectionTitle: {
-    color: '#0f172a',
+    color: isDark ? '#f8fafc' : '#0f172a',
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 12,
@@ -384,7 +387,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   countCard: {
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
     width: '23%',
     borderRadius: 16,
     paddingVertical: 16,
@@ -398,11 +401,11 @@ const styles = StyleSheet.create({
   countNumber: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#0f172a',
+    color: isDark ? '#f8fafc' : '#0f172a',
   },
   countLabel: {
     fontSize: 11,
-    color: '#64748b',
+    color: isDark ? '#94a3b8' : '#64748b',
     marginTop: 4,
     marginBottom: 12,
   },
@@ -441,7 +444,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   recentList: {
-    backgroundColor: '#fff',
+    backgroundColor: isDark ? '#1e293b' : '#fff',
     borderRadius: 16,
     padding: 12,
     shadowColor: '#000',
@@ -467,7 +470,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   recentTitle: {
-    color: '#0f172a',
+    color: isDark ? '#f8fafc' : '#0f172a',
     fontSize: 14,
     fontWeight: '600',
     marginBottom: 4,
@@ -478,7 +481,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   recentLocationText: {
-    color: '#64748b',
+    color: isDark ? '#94a3b8' : '#64748b',
     fontSize: 12,
     marginLeft: 4,
   },
