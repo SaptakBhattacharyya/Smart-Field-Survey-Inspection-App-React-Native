@@ -237,8 +237,8 @@ const getStyles = (isDark) => StyleSheet.create({
     fontWeight: '600',
   },
   avatarContainer: {
-    width: 80,
-    height: 100,
+    width: 100,
+    height: 200,
     justifyContent: 'flex-end',
   },
   avatar3D: {
