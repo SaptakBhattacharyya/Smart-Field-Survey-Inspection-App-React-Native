@@ -2,6 +2,8 @@
 
 A comprehensive field survey and inspection suite built with React Native and Expo. This application provides field agents with tools to conduct surveys, capture data, and monitor field activities efficiently.
 
+youtube link : https://youtu.be/QXnwBrve-BQ?si=zHOBMiTllFQCGUR4
+
 ## Features
 
 - User Authentication and Profile Management
@@ -15,9 +17,9 @@ A comprehensive field survey and inspection suite built with React Native and Ex
 
 ## Screenshots
 
-![Sidebar Navigation](C:/Users/Saptak/.gemini/antigravity-ide/brain/tempmediaStorage/media__1784472794944.jpg)
+![Dashboard](https://res.cloudinary.com/e2gnvesl/image/upload/v1784473366/WhatsApp_Image_2026-07-19_at_3.47.05_PM_e0pna7.jpg)
 
-![Dashboard](C:/Users/Saptak/.gemini/antigravity-ide/brain/tempmediaStorage/media__1784472794945.jpg)
+![Sidebar Navigation](https://res.cloudinary.com/e2gnvesl/image/upload/v1784473365/WhatsApp_Image_2026-07-19_at_3.47.05_PM_1_ofpcxq.jpg)
 
 ## Tech Stack
 
